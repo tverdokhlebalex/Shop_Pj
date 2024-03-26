@@ -1,0 +1,6 @@
+.idea
+.vscode
+node_modules
+Shop.Admin/node_modules
+Shop.API/node_modules
+.DS_Store
