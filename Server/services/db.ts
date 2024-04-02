@@ -11,7 +11,7 @@ export async function initDataBase(): Promise<Connection | null> {
       port: Number(DB_PORT),
       password: DB_PASSWORD,
       user: DB_USER,
-      database: DB_NAME,
+      database: DB_NAME
     });
   } catch (e: any) {
     console.error(e.message || e);

@@ -34,3 +34,4 @@ export interface IAuthRequisites {
   username: string;
   password: string;
 }
+

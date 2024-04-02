@@ -6,7 +6,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "paths": {
-      "@Shared/*": ["Shared/*"]
+      "@Shared/*": ["../Shared/*"]
     }
   },
   "exclude": [

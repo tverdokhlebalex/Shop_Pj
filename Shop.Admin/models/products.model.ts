@@ -11,15 +11,20 @@ export async function getProducts(): Promise<IProduct[]> {
 export async function searchProducts(
   filter: IProductFilterPayload
 ): Promise<IProduct[]> {
-  const { data } = await axios.get<IProduct[]>(`${API_HOST}/products/search`, {
-    params: filter,
-  });
+  const { data } = await axios.get<IProduct[]>(
+    `${API_HOST}/products/search`,
+    { params: filter }
+  );
   return data || [];
 }
 
-export async function getProduct(id: string): Promise<IProduct | null> {
+export async function getProduct(
+  id: string
+): Promise<IProduct | null> {
   try {
-    const { data } = await axios.get<IProduct>(`${API_HOST}/products/${id}`);
+    const { data } = await axios.get<IProduct>(
+      `${API_HOST}/products/${id}`
+    );
     return data;
   } catch (e) {
     return null;
@@ -33,8 +38,8 @@ export async function removeProduct(id: string): Promise<void> {
 function splitNewImages(str = ""): string[] {
   return str
     .split(/\r\n|,/g)
-    .map((url) => url.trim())
-    .filter((url) => url);
+    .map(url => url.trim())
+    .filter(url => url);
 }
 
 function compileIdsToRemove(data: string | string[]): string[] {
@@ -47,17 +52,14 @@ export async function updateProduct(
   formData: IProductEditData
 ): Promise<void> {
   try {
-    const { data: currentProduct } = await axios.get<IProduct>(
-      `${API_HOST}/products/${productId}`
-    );
+    const { data: currentProduct } = await axios.get<IProduct>(`${API_HOST}/products/${productId}`);
 
     if (formData.commentsToRemove) {
       const commentsIdsToRemove = compileIdsToRemove(formData.commentsToRemove);
 
-      const getDeleteCommentActions = () =>
-        commentsIdsToRemove.map((commentId) => {
-          return axios.delete(`${API_HOST}/comments/${commentId}`);
-        });
+      const getDeleteCommentActions = () => commentsIdsToRemove.map(commentId => {
+        return axios.delete(`${API_HOST}/comments/${commentId}`);
+      });
 
       await Promise.all(getDeleteCommentActions());
     }
@@ -70,33 +72,28 @@ export async function updateProduct(
     if (formData.newImages) {
       const urls = splitNewImages(formData.newImages);
 
-      const images = urls.map((url) => ({ url, main: false }));
+      const images = urls.map(url => ({ url, main: false }));
 
       if (!currentProduct.thumbnail) {
         images[0].main = true;
       }
 
-      await axios.post(`${API_HOST}/products/add-images`, {
-        productId,
-        images,
-      });
+      await axios.post(`${API_HOST}/products/add-images`, { productId, images });
     }
 
-    if (
-      formData.mainImage &&
-      formData.mainImage !== currentProduct.thumbnail?.id
-    ) {
+    if (formData.mainImage && formData.mainImage !== currentProduct.thumbnail?.id) {
       await axios.post(`${API_HOST}/products/update-thumbnail/${productId}`, {
-        newThumbnailId: formData.mainImage,
+        newThumbnailId: formData.mainImage
       });
     }
 
     await axios.patch(`${API_HOST}/products/${productId}`, {
       title: formData.title,
       description: formData.description,
-      price: Number(formData.price),
+      price: Number(formData.price)
     });
   } catch (e) {
     console.log(e);
   }
 }
+

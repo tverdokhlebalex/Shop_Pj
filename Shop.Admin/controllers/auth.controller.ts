@@ -20,7 +20,7 @@ export const validateSession = (
   } else {
     res.redirect(`/${process.env.ADMIN_PATH}/auth/login`);
   }
-};
+}
 
 authRouter.get("/login", async (req: Request, res: Response) => {
   try {
@@ -30,23 +30,28 @@ authRouter.get("/login", async (req: Request, res: Response) => {
   }
 });
 
-authRouter.post(
-  "/authenticate",
-  async (req: Request<{}, {}, IAuthRequisites>, res: Response) => {
-    try {
-      const verified = await verifyRequisites(req.body);
+authRouter.post("/authenticate", async (
+  req: Request<{}, {}, IAuthRequisites>,
+  res: Response
+) => {
+  try {
+    const verified = await verifyRequisites(req.body);
 
-      if (verified) {
-        req.session.username = req.body.username;
-        res.redirect(`/${process.env.ADMIN_PATH}`);
-      } else {
-        res.redirect(`/${process.env.ADMIN_PATH}/auth/login`);
-      }
-    } catch (e) {
-      throwServerError(res, e);
+    if (verified) {
+      req.session.username = req.body.username;
+      res.redirect(`/${process.env.ADMIN_PATH}`);
+    } else {
+      res.redirect(`/${process.env.ADMIN_PATH}/auth/login`);
     }
+  } catch (e) {
+    throwServerError(res, e);
   }
-);
+});
+
+/**
+ * 35.4.1
+ * метод logout для выхода из админки
+ */
 authRouter.get("/logout", async (req: Request, res: Response) => {
   try {
     req.session.destroy((e) => {
@@ -55,8 +60,9 @@ authRouter.get("/logout", async (req: Request, res: Response) => {
       }
 
       res.redirect(`/${process.env.ADMIN_PATH}/auth/login`);
-    });
+    })
   } catch (e) {
     throwServerError(res, e);
   }
 });
+
