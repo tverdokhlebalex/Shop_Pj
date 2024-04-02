@@ -1,0 +1,23 @@
+.Button {
+    cursor: pointer;
+    background-color: transparent;
+    &:hover {
+        opacity: .8;
+    }
+}
+
+.disabled {
+    opacity: 0.5;
+}
+
+.appButton{
+    width: 176px;
+    height: 45px;
+    color: var(--btn);
+    border: 1px solid var(--btn);
+    text-transform: uppercase;
+}
+
+[data-theme="dark"] .appButton{
+    color: var(--text-white);
+}

@@ -1,0 +1,30 @@
+@import "normalize";
+@import "variables";
+
+body {
+  color: var(--text-white);
+  background-color: var(--bg-dark);
+  height: 100vh;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.main {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.wrapper {
+  width: calc(100vw - 100px);
+  height: 100%;
+  margin: 50px auto;
+  border-radius: 10px;
+  max-width: 1400px;
+
+  @media (max-width: 645px) {
+    width: calc(100vw - 30px);
+    margin-top: 15px;
+  }
+}

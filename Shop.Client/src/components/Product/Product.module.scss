@@ -1,0 +1,72 @@
+.product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: var(--card);
+  font-size: 24px;
+}
+
+.card {
+  display: flex;
+  gap: 40px;
+}
+
+.comments {
+  margin: 20px 0;
+}
+
+.commentsInner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.email{
+  color: var(--text-dark);
+}
+
+.text {
+  width: 400px;
+  line-height: 30px;
+}
+
+.image {
+  width: 300px;
+  height: 400px;
+}
+
+.otherImages {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 10px;
+}
+
+.otherImage {
+  width: 100px;
+  height: 150px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.similarProducts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.similarUl {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.similarLi {
+  &:hover {
+    color: var(--bg-dark);
+  }
+}

@@ -1,7 +1,6 @@
 import express, { Express } from "express";
 
-
-const host = process.env.LOCAL_HOST;
+const host = process.env.LOCAL_PATH;
 const port = Number(process.env.LOCAL_PORT);
 
 export function initServer(): Express {
