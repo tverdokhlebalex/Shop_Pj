@@ -39,50 +39,10 @@ export const REPLACE_PRODUCT_THUMBNAIL = `
     ELSE main
 END
 WHERE image_id IN (?, ?);
-`;
+`
 
 export const UPDATE_PRODUCT_FIELDS = `
     UPDATE products 
     SET title = ?, description = ?, price = ? 
     WHERE product_id = ?
-`;
-
-export const FIND_PROJECT_BY_ID = `SELECT * FROM products WHERE product_id = ?`;
-
-export const SELECT_SIMILAR_PRODUCTS = `
-    SELECT products.* FROM similar
-    JOIN products ON item2 = products.product_id
-    WHERE item1 = ?
-`;
-
-export const SELECT_OTHER_PRODUCTS = `
-    SELECT * FROM products
-    WHERE product_id != ?
-`;
-
-export const SELECT_OTHER_PRODUCTS_WITHOUT_SIMILAR = `
-    SELECT * FROM products
-    WHERE product_id != ? AND product_id NOT IN ?
-`;
-
-export const FIND_DUPLICATED_SIMILAR_PRODUCTS = `
-    SELECT * FROM similar
-    WHERE item1 = ?
-    AND item2 = ?
-`;
-
-export const INSERT_SIMILAR_PRODUCT = `
-    INSERT INTO similar
-    (item1, item2)
-    VALUES ?
-`;
-
-export const DELETE_PRODUCTS_FROM_SIMILAR = `
-    DELETE FROM similar 
-    WHERE item1 IN ? OR item2 IN ?;
-`;
-
-export const DELETE_SIMILAR_PRODUCTS = `
-    DELETE FROM similar 
-    WHERE item1 = ? AND item2 IN ?;
-`;
+`
